@@ -8,12 +8,12 @@ Node.js初心者が作成したため，予期しない動作などあるかも�
 
 ## 使い方
 ```
-    var ogp = require('ogp');
+    var ogp = require('ogp-parser');
 ```
 
 ## サンプル
 ```javascript
-    var ogp = require("ogpParser");
+    var ogp = require("ogp-parser");
     var url = "http://ogp.me";
     ogp.parser(url,function(error,data){
 	console.log(data);
