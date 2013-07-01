@@ -1,0 +1,30 @@
+{
+  "name": "ogp-parser",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "jsdom": "*",
+    "jquery": "*"
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "db4f225533c56360ea9f61d759184e9fbe2b4dea",
+  "description": "This Package is Open Graph Parser.",
+  "main": "ogpParser.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./example/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ukyoda/ogpParser.git"
+  },
+  "keywords": [
+    "ogp",
+    "OpenGraphProtocol"
+  ],
+  "author": "ukyoda",
+  "license": "BSD",
+  "directories": {
+    "example": "example"
+  }
+}
