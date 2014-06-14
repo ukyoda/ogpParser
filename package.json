@@ -1,10 +1,10 @@
 {
   "name": "ogp-parser",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "private": false,
   "dependencies": {
-    "jsdom": "*",
-    "jquery": "*"
+    "jQuery": "~1.7.4",
+    "cheerio": "~0.17.0"
   },
   "readmeFilename": "README.md",
   "gitHead": "db4f225533c56360ea9f61d759184e9fbe2b4dea",

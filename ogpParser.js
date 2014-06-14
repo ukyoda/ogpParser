@@ -4,47 +4,75 @@
  */
 
 
-var jsdom = require('jsdom'),
-    jquery = require("jquery");
+var cheerio = require('cheerio')
+ , $
+ , http = require('http');
 
 
 exports.parser = function(url,callback){
-
-	jsdom.env({ html: url, done: function(error, page) {
-		if(error){
-			callback(error,null);
-			return false;
-		}
-		var ogpObject = {};
-		var $ = jquery.create(page);
-		$("head").find("meta").each(function(){
-			var object = ogpParser($(this));
-			if(object !== null){
-				var key = Object.keys(object)[0];
-				if(typeof ogpObject[key] === "undefined"){
-					ogpObject[key] = [];
-				}
-				ogpObject[key].push(object[key]);
-			}
+	var html = "";
+	http.get(url, function(res){
+		res.on('data', function(data){
+			html += data.toString();
 		});
-		callback(null,ogpObject);
-	}});
+		res.on('end', function(){
+			var ogps = onDataCallBack.call(this,url, html);
+			callback(null, ogps);
+		});
+	});
 };
 
+var onDataCallBack = function(url, html){
+	$ = cheerio.load(html);
+	//meta情報をパースする
+	var $metas = $('head meta');
+	var ogps = {
+		ogp: [],
+		seo: []
+	};
+	$metas.each(function(index, value){
+		var ogp = ogpParser($(value));
+		var seo = seoParser($(value));
+		var data, result;
+		var res = {}, property;
+		if(ogp) {
+			data = ogp;
+			result = ogps.ogp;
+		} else if(seo){
+			data = seo;
+			result = ogps.seo;
+		} else {
+			return;
+		}
+		if(!result[data.prop]) {
+			result[data.prop] = [];
+		}
+		result[data.prop].push(data.content);
+	});
+	return ogps;
+};
 
-
-var ogpParser = function(metaObject){
-	var property = metaObject.attr("property");
-	var content = metaObject.attr("content");
-	if(typeof property === "undefined" || typeof content === "undefined"){
+var seoParser = function($metaObject){
+	var name = $metaObject.attr('name');
+	var content = $metaObject.attr('content');
+	if( !name || !content) {
 		return null;
 	}
-	var result = {};
-	try{
-		result[property] = content;
-	} catch(e){
-		result = null;
+	return {
+		prop: name,
+		content: content
+	};
+};
+
+var ogpParser = function($metaObject){
+	var property = $metaObject.attr("property");
+	var content = $metaObject.attr("content");
+	if( !property || !content ){
+		return null;
 	}
-	return result;
+	return {
+		prop: property,
+		content: content
+	};
 };
 
