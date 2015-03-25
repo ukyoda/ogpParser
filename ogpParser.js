@@ -27,6 +27,7 @@ var onDataCallBack = function(url, html){
 	//meta情報をパースする
 	var $metas = $('head meta');
 	var ogps = {
+		title: $('head title').text(),
 		ogp: [],
 		seo: []
 	};
