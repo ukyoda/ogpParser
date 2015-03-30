@@ -6,12 +6,14 @@
 
 var cheerio = require('cheerio')
  , $
- , http = require('http');
+ , http = require('http')
+ , https = require('https');
 
 
 exports.parser = function(url,callback){
 	var html = "";
-	http.get(url, function(res){
+	var httpRequest = (url.indexOf('https://') !== -1)? https : http;
+	httpRequest.get(url, function(res){
 		res.on('data', function(data){
 			html += data.toString();
 		});
