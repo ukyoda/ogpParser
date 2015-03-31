@@ -7,12 +7,17 @@
 var cheerio = require('cheerio')
  , $
  , http = require('http')
- , https = require('https');
+ , https = require('https')
+ , followRedirects = require('follow-redirects');
 
-
-exports.parser = function(url,callback){
+exports.parser = function(url, callback, redirectFlg){
 	var html = "";
-	var httpRequest = (url.indexOf('https://') !== -1)? https : http;
+	var httpRequest;
+	if(redirectFlg) {
+	    httpRequest = (url.indexOf('https://') !== -1)? followRedirects.https : followRedirects.http;
+	} else {
+	    httpRequest = (url.indexOf('https://') !== -1)? https : http;
+	}
 	httpRequest.get(url, function(res){
 		res.on('data', function(data){
 			html += data.toString();
