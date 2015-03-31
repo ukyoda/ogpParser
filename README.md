@@ -6,6 +6,7 @@
 * 2014年 6月: データフォーマットを修正
 * 2015年 3月: ページタイトル情報を追加
 * 2015年 3月: https対応
+* 2015年 4月: リダイレクトに対応しました。第３引数をtrueにすると、リダイレクトを追跡してページを取得します
 
 ## 依存ライブラリ
 * cheerio
@@ -15,13 +16,22 @@
     var ogp = require('ogp-parser');
 ```
 
-## サンプル
+## サンプル (リダイレクトあり)
 ```javascript
     var ogp = require("ogp-parser");
     var url = "http://ogp.me";
     ogp.parser(url,function(error,data){
 	console.log(data);
-});
+    }, true);
+```
+
+## サンプル (リダイレクトなし)
+```javascript
+    var ogp = require("ogp-parser");
+    var url = "http://ogp.me";
+    ogp.parser(url,function(error,data){
+	console.log(data);
+    }, false);
 ```
 
 ## 出力
