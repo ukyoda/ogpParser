@@ -10,6 +10,7 @@
 
 ## 依存ライブラリ
 * cheerio
+* follow-redirects (新規)
 
 ## 使い方
 ```
