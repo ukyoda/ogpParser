@@ -1,6 +1,6 @@
 {
   "name": "ogp-parser",
-  "version": "0.2.1",
+  "version": "0.3",
   "private": false,
   "dependencies": {
     "cheerio": "~0.17.0",
