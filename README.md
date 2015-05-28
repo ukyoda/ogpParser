@@ -35,7 +35,7 @@
 ```
 
 ## 出力
-```json
+```javascript
 
 { title: 'The Open Graph protocol',
   ogp: 
