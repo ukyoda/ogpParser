@@ -2,12 +2,18 @@
  * @fileOverview OpenGraph Protocol Parser
  * @author ukyoda
  */
+
+
+var convertCharset = function(str,encoding){
+	var iconv = require("iconv-lite");
+	return iconv.decode(str,encoding);
+}
+
 var charsetConverter = function(str){
 	var jschardet = require("jschardet");
-	var iconv = require("iconv-lite");
 	var detected = jschardet.detect(str);
 	if(detected.encoding != "utf8" && detected.encoding != "ascii")
-		return iconv.decode(str,detected.encoding);
+		return convertCharset(str,detected.encoding);
 }
 
 var cheerio = require('cheerio')
@@ -91,3 +97,7 @@ var ogpParser = function($metaObject){
 		content: content
 	};
 };
+
+var additionalParser = function($metaObject){
+	
+}
