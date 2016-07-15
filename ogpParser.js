@@ -15,6 +15,7 @@ var charsetConverter = function(str){
 	var detected = jschardet.detect(str);
 	if(detected.encoding != "utf8" && detected.encoding != "ascii")
 		return convertCharset(str,detected.encoding);
+
 }
 
 var cheerio = require('cheerio')
@@ -98,3 +99,4 @@ var ogpParser = function($metaObject){
 		content: content
 	};
 };
+
