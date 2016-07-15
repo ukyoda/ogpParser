@@ -1,6 +1,6 @@
 {
-  "name": "ogp-parser-decode",
-  "version": "0.1.0",
+  "name": "ogp-parser",
+  "version": "0.3.0",
   "private": false,
   "dependencies": {
     "cheerio": "~0.17.0",
@@ -10,7 +10,8 @@
     "jschardet":"1.4.1"
   },
   "readmeFilename": "README.md",
-  "description": "This Package is Open Graph Parser with AutoDecoding",
+  "gitHead": "db4f225533c56360ea9f61d759184e9fbe2b4dea",
+  "description": "This Package is Open Graph Parser.",
   "main": "ogpParser.js",
   "devDependencies": {},
   "scripts": {
@@ -18,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nemu626/ogpParser"
+    "url": "https://github.com/ukyoda/ogpParser.git"
   },
   "keywords": [
     "ogp",
     "OpenGraphProtocol"
   ],
-  "author": "nemu626",
+  "author": "ukyoda",
   "license": "BSD",
   "directories": {
     "example": "example"
