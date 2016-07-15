@@ -3,12 +3,13 @@
  * @author ukyoda
  */
 
-
+// @str : encoded string
+// @encoding ; encoding character code string 
 var convertCharset = function(str,encoding){
 	var iconv = require("iconv-lite");
 	return iconv.decode(str,encoding);
 }
-
+//@str : encoded string
 var charsetConverter = function(str){
 	var jschardet = require("jschardet");
 	var detected = jschardet.detect(str);
@@ -97,7 +98,3 @@ var ogpParser = function($metaObject){
 		content: content
 	};
 };
-
-var additionalParser = function($metaObject){
-	
-}
