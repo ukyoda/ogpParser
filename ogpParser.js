@@ -3,6 +3,20 @@
  * @author ukyoda
  */
 
+// @str : encoded string
+// @encoding ; encoding character code string 
+var convertCharset = function(str,encoding){
+	var iconv = require("iconv-lite");
+	return iconv.decode(str,encoding);
+}
+//@str : encoded string
+var charsetConverter = function(str){
+	var jschardet = require("jschardet");
+	var detected = jschardet.detect(str);
+	if(detected.encoding != "utf8" && detected.encoding != "ascii")
+		return convertCharset(str,detected.encoding);
+
+}
 
 var cheerio = require('cheerio')
  , $
@@ -19,10 +33,12 @@ exports.parser = function(url, callback, redirectFlg){
 	    httpRequest = (url.indexOf('https://') !== -1)? https : http;
 	}
 	httpRequest.get(url, function(res){
+		var chunks = [];
 		res.on('data', function(data){
-			html += data.toString();
+			chunks.push(data);
 		});
 		res.on('end', function(){
+			var html = charsetConverter(Buffer.concat(chunks));
 			var ogps = onDataCallBack.call(this,url, html);
 			callback(null, ogps);
 		});
