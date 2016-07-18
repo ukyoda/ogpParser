@@ -9,5 +9,5 @@ if(!url || url.match(/^(http|https)\:\/\//g) === null) {
 var ogp = require("../ogpParser");
 console.log("URL:"+url);
 ogp.parser(url,function(error,data){
-	console.log(data);
+	console.log(JSON.stringify(data, null, "    "));
 }, true);
