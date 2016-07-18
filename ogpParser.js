@@ -53,8 +53,8 @@ var onDataCallBack = function(url, html){
 	var $metas = $('head meta');
 	var ogps = {
 		title: $('head title').text(),
-		ogp: [],
-		seo: []
+		ogp: {},
+		seo: {}
 	};
 	$metas.each(function(index, value){
 		var ogp = ogpParser($(value));
