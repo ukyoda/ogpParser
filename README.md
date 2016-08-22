@@ -24,6 +24,12 @@
 * jsChardet
 * iconv-lite
 
+## インストール
+
+```bash
+$ npm install ogp-parser
+```
+
 ## 使い方
 
 ```javascript
@@ -103,5 +109,5 @@ parser(url, false).then(function(data) {
 
 ## 免責事項など
 
-* ライブラリの利用は特に制限を設けません
-* このライブラリは作者の勉強用に作成したため，今後のサポートは基本的に考えておりません。
+* 本ライブラリはMITライセンスに設定しました
+* 本ライブラリは商用での利用に特に制限を設けません
