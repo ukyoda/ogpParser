@@ -1,34 +1,51 @@
-var cheerio = require('cheerio')
-    , extractOgpData = require('./extractOgpData')
-    , extractSeoData = require('./extractSeoData')
-    ;
+const cheerio = require('cheerio');
 
-module.exports = function(html) {
-    var $ = cheerio.load(html);
-    var $metas = $('head meta');
-    var title = $('head title').text();
-    var ogpSet = {};
-    var seoSet = {};
-
-    $metas.each(function(index, value) {
-        var ogp = extractOgpData($(value));
-        var seo = extractSeoData($(value));
-        if(ogp) {
-            if(!ogpSet[ogp.prop]) {
-                ogpSet[ogp.prop] = [];
-            }
-            ogpSet[ogp.prop].push(ogp.content);
-        }
-        if(seo) {
-            if(!ogpSet[seo.prop]) {
-                seoSet[seo.prop] = [];
-            }
-            seoSet[seo.prop].push(seo.content);
-        }
-    });
+function extractData($meta, propKey, contentKey) {
+  let prop = $meta.attr(propKey);
+  let content = $meta.attr(contentKey);
+  if(!prop || !content) {
+    return null;
+  } else {
     return {
-        title: title,
-        ogp: ogpSet,
-        seo: seoSet
+      prop: prop,
+      content: content
     };
+  }
+}
+
+module.exports = function parseHtml(html) {
+  const $ = cheerio.load(html);
+  const $metas = $('head meta');
+  const title = $('head title').text();
+  let ogpSet = {};
+  let seoSet = {};
+
+  $metas.each((index, value) => {
+    const ogp = extractData($(value), 'property', 'content');
+    const seo = extractData($(value), 'name', 'content');
+    let target = null;
+    let prop, content;
+    if(ogp !== null) {
+      target = ogpSet;
+      prop = ogp.prop;
+      content = ogp.content;
+    } else if(seo !== null) {
+      target = seoSet;
+      prop = seo.prop;
+      content = seo.content;
+    } else {
+      return;
+    }
+
+    if(!target[prop]) {
+      target[prop] = [];
+    }
+    target[prop].push(content);
+
+  });
+  return {
+    title: title,
+      ogp: ogpSet,
+      seo: seoSet
+  };
 };
