@@ -8,11 +8,9 @@ var parseHtml = require('./utils/parseHtml');
 
 var parser = function(url, redirectFlg) {
 	return getContents(url, redirectFlg).then(function(html) {
-        return new Promise(function(resolve) {
-            var data = parseHtml(html);
-            resolve(data);
-        });
-    });
+		let data = parseHtml(html);
+		return Promise.resolve(data);
+  });
 };
 
 module.exports = parser;
