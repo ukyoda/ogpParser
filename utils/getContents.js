@@ -1,10 +1,11 @@
-var http = require('http')
-    , https = require('https')
-    , followRedirects = require('follow-redirects')
-    , charsetConverter = require('./charsetConverter');
+const http = require('http'),
+      https = require('https'),
+      followRedirects = require('follow-redirects'),
+      charsetConverter = require('./charsetConverter')
+      ;
 
-module.exports = function (url, redirectFlg) {
-    var httpRequest;
+module.exports = function getContents(url, redirectFlg) {
+    let httpRequest;
     if(redirectFlg) {
         httpRequest = (url.indexOf('https://') !== -1)? followRedirects.https : followRedirects.http;
     } else {
@@ -12,12 +13,12 @@ module.exports = function (url, redirectFlg) {
     }
     return new Promise(function(resolve, reject) {
         httpRequest.get(url, function(res) {
-            var chunks = [];
+            let chunks = [];
             res.on('data', function(data) {
                 chunks.push(data);
             });
             res.on('end', function() {
-                var html = charsetConverter(Buffer.concat(chunks));
+                let html = charsetConverter(Buffer.concat(chunks));
                 resolve(html);
             });
         }).on('error', function(error) {
