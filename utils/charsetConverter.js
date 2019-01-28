@@ -12,7 +12,7 @@ const iconv = require('iconv-lite'),
  */
 module.exports = function charsetConverter(str) {
 	var detected = jschardet.detect(str); // 文字コードを取得
-	if(detected.encoding != "utf8" && detected.encoding != "ascii"){
+	if(detected.encoding != "utf8" && detected.encoding != "ascii" && detected.encoding != 'ISO-8859-2'){
 		return iconv.decode(str, detected.encoding);
 	} else {
 		return str;
