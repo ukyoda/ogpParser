@@ -12,9 +12,12 @@
   "gitHead": "",
   "description": "This Package is Open Graph Parser.",
   "main": "ogpParser.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
   "scripts": {
-    "test": "node ./example/app.js"
+    "test": "node_modules/mocha/bin/mocha test"
   },
   "repository": {
     "type": "git",
