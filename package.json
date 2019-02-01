@@ -6,7 +6,8 @@
     "cheerio": "^1.0.0-rc.2",
     "follow-redirects": "0.0.3",
     "iconv-lite": "0.4.13",
-    "jschardet": "1.4.1"
+    "jschardet": "1.4.1",
+    "lodash": "^4.17.11"
   },
   "readmeFilename": "README.md",
   "gitHead": "",
