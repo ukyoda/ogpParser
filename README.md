@@ -1,6 +1,6 @@
 # Open Graph Protocol Parser
 
-![npm](https://img.shields.io/npm/v/ogp-parser)
+[![npm][npm]][npm-url]
 
 このモジュールは，URLからOGPタグ情報、SEO関連のタグ情報などを抽出する為のライブラリです。
 
@@ -115,3 +115,6 @@ parser(url, false).then(function(data) {
 
 * 本ライブラリはMITライセンスに設定しました
 * 本ライブラリは商用での利用に特に制限を設けません
+
+[npm]: https://img.shields.io/npm/v/ogp-parser
+[npm-url]: https://www.npmjs.com/package/ogp-parser
