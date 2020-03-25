@@ -3,11 +3,11 @@
   "version": "0.4.5",
   "private": false,
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "follow-redirects": "0.0.3",
-    "iconv-lite": "0.4.13",
-    "jschardet": "1.4.1",
-    "lodash": ">=4.17.13"
+    "cheerio": "^1.0.0-rc.3",
+    "follow-redirects": "1.10.0",
+    "iconv-lite": "0.5.1",
+    "jschardet": "2.1.1",
+    "lodash": ">=4.17.15"
   },
   "readmeFilename": "README.md",
   "gitHead": "",
@@ -15,12 +15,17 @@
   "main": "ogpParser.js",
   "devDependencies": {
     "chai": "^4.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0"
+    "minimist": "^1.2.5",
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.0"
+  },
+  "resolutions": {
+    "minimist": "^1.2.5"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test",
-    "test-cov": "istanbul cover --print both _mocha -- test/ "
+    "test-cov": "nyc npm run test",
+    "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
     "type": "git",
