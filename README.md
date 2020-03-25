@@ -25,15 +25,24 @@
 
 ## 依存ライブラリ
 
-* cheerio
-* follow-redirects (新規)
-* jsChardet
-* iconv-lite
+package.jsonを参照してください
 
 ## インストール
 
 ```bash
 $ npm install ogp-parser
+```
+
+## テスト
+
+```bash
+$ npm test
+```
+
+or 
+
+```bash
+$ npm run test-cov
 ```
 
 ## 使い方
