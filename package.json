@@ -33,7 +33,12 @@
   },
   "keywords": [
     "ogp",
-    "OpenGraphProtocol"
+    "OpenGraphProtocol",
+    "open-graph",
+    "seo",
+    "twitter-card",
+    "facebook-ogp",
+    "meta"
   ],
   "author": "ukyoda",
   "license": "MIT",
