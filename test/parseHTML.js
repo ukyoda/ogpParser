@@ -38,9 +38,8 @@ const html = `
 </html>
 `;
 
-describe('parseHtmlが正常に動くかテスト', async () => {
-  const result = await parseHtml(html);
-  console.log(result);
+describe('parseHtmlが正常に動くかテスト', () => {
+  const result = parseHtml(html);
   it('指定したキーが全て存在する', () => {
     assert.containsAllKeys(result, ['title', 'ogp', 'seo']);
     assert.containsAllKeys(result.ogp, ['og:title', 'og:type', 'og:url', 'og:image', 'fb:admins', 'fb:app_id']);
