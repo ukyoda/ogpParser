@@ -3,6 +3,7 @@
   "version": "0.4.7",
   "private": false,
   "dependencies": {
+    "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "follow-redirects": "1.10.0",
     "iconv-lite": "0.5.1",
