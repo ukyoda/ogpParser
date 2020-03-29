@@ -16,10 +16,11 @@ function extractData($meta, propKey, contentKey) {
 module.exports = function parseHtml(html) {
   const $ = cheerio.load(html);
   const $metas = $('head meta');
+  const $link = $('head link');
   const title = $('head title').text();
   const ogpSet = {};
   const seoSet = {};
-
+  // メタタグ
   $metas.each((index, value) => {
     const ogp = extractData($(value), 'property', 'content');
     const seo = extractData($(value), 'name', 'content');
@@ -43,9 +44,20 @@ module.exports = function parseHtml(html) {
     target[prop].push(content);
 
   });
+
+  // oEmbedのURLを取得
+  const oembedJsonTag = $link.filter((_, val) => $(val).attr('type') === 'application/json+oembed');
+  const oembedXmlTag = $link.filter((_, val) => $(val).attr('type') === 'text/xml+oembed');
+  let oembedInfo = null;
+  if (oembedJsonTag.length > 0) {
+    oembedInfo = {type: 'json', url: oembedJsonTag.attr('href')};
+  } else if (oembedXmlTag.length > 0) {
+    oembedInfo = {type: 'xml', url: oembedXmlTag.attr('href')};
+  }
   return {
     title: title,
       ogp: ogpSet,
-      seo: seoSet
+      seo: seoSet,
+      oembedInfo: oembedInfo
   };
 };
