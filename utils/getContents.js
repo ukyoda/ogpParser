@@ -3,13 +3,10 @@ const axios = require('axios'),
       charsetConverter = require('./charsetConverter')
       ;
 
-module.exports = function getContents(url, redirectFlg=true, headers={}) {
-    if (!redirectFlg) {
-        console.warn('[Deprication Warning]: RedirectFlg is disabled. This Variable is remove at future version.');
-    }
+module.exports = function getContents(url, { headers = {} } = {}) {
     return new Promise((resolve, reject) => {
         axios.get(url, { headers }).then(res => {
-            resolve(res.data)
+            resolve(res.data);
         }).catch(err => {
             reject(err);
         })

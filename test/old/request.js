@@ -1,12 +1,12 @@
 const chai = require('chai');
 const assert = chai.assert;
-const parser = require('../ogpParser').futureVersion;
+const parser = require('../../ogpParser');
 const nock = require('nock');
 const fs = require('fs')
 
-const html = fs.readFileSync(`${__dirname}/html/demo.html`);
-const htmlOembed = fs.readFileSync(`${__dirname}/html/demo_oembed.html`);
-const jsonOembed = JSON.parse(fs.readFileSync(`${__dirname}/html/oembed.json`));
+const html = fs.readFileSync(`${__dirname}/../html/demo.html`);
+const htmlOembed = fs.readFileSync(`${__dirname}/../html/demo_oembed.html`);
+const jsonOembed = JSON.parse(fs.readFileSync(`${__dirname}/../html/oembed.json`));
 
 function resCheck(data) {
   assert.containsAllKeys(data, ['title', 'ogp', 'seo'], '指定したキーが全て存在する');
@@ -15,7 +15,7 @@ function resCheck(data) {
   assert.isObject(data.seo, 'プロパティ`seo`はオブジェクト');
 }
 
-describe('HTTPリクエストテスト', function () {
+describe('HTTPリクエストテスト(旧バージョン)', function () {
   
   before(() => {
     nock('http://example.com').get('/').reply(200, html);
@@ -30,7 +30,7 @@ describe('HTTPリクエストテスト', function () {
   });
 
   it ('正常リクエスト: HTTPリクエストが正常に処理される', function (done) {
-    parser('http://example.com').then(data => {
+    parser('http://example.com', false).then(data => {
       resCheck(data);
       done();
     }).catch(err => {
@@ -40,7 +40,7 @@ describe('HTTPリクエストテスト', function () {
   });
 
   it('正常リクエスト：SSLリクエストが正常に処理される', function (done) {
-    parser('https://example.com').then(data => {
+    parser('https://example.com', true).then(data => {
       resCheck(data);
       done();
     }).catch(err => {
@@ -48,28 +48,8 @@ describe('HTTPリクエストテスト', function () {
       done();
     });
   });
-  it('正常リクエスト: oEmbed付きデータ', function (done) {
-    parser('https://example.com/oembed').then(data => {
-      assert.containsAllKeys(data, ['oembed'], 'oembedが取得できている');
-      assert.containsAllKeys(data.oembed, Object.keys(jsonOembed));
-      const oembed = data.oembed;
-      Object.keys(jsonOembed).forEach(key => {
-        assert.equal(oembed[key], jsonOembed[key], `Check Value[key=${key}]`);
-      });
-      done();
-    }).catch(err => {
-      assert.fail(err);
-      done();
-    });
-  });
-  it('正常リクエスト: oEmbedをスキップ', function (done) {
-    parser('https://example.com/oembed2', {skipOembed: true}).then(data => {
-      assert.doesNotHaveAnyKeys(data, ['oembed'])
-      done();
-    });
-  });
   it('異常系: 存在しないURLにアクセス', function (done) {
-    parser('http://abc.example.com').then(data => {
+    parser('http://abc.example.com', true).then(data => {
       assert.fail(`resolveが返却されている(url=${url})`)
       done();
     }).catch(err => {
@@ -78,7 +58,7 @@ describe('HTTPリクエストテスト', function () {
     });
   });
   it('異常系: Not Found エラー', function (done) {
-    parser('https://notfound.example.com').then(data => {
+    parser('https://notfound.example.com', true).then(data => {
       assert.fail(`resolveが返却されている(url=${url})`)
       nock.cleanAll();
       done();
