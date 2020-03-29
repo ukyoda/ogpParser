@@ -1,6 +1,7 @@
-var chai = require('chai');
-var assert = chai.assert;
-var parser = require('../ogpParser');
+const chai = require('chai');
+const assert = chai.assert;
+const parser = require('../ogpParser');
+const nock = require('nock');
 
 function resCheck(data) {
   assert.containsAllKeys(data, ['title', 'ogp', 'seo'], '指定したキーが全て存在する');
@@ -35,6 +36,19 @@ describe('HTTPリクエストテスト', function () {
     }).catch(err => {
       assert.ok('OK', `Catch OK(err=${err})`);
       done();
-    })
+    });
   });
+  it('異常系: Not Found エラー', function (done) {
+    const url = 'http://google.co.jp';
+    nock(url).get('/').reply(404);
+    parser(url).then(data => {
+      assert.fail(`resolveが返却されている(url=${url})`)
+      nock.cleanAll();
+      done();
+    }).catch(err => {
+      assert.ok('OK', `Catch OK(err=${err})`);
+      nock.cleanAll();
+      done();
+    });
+  })
 });
