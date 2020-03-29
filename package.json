@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "fast-xml-parser": "^3.16.0",
     "follow-redirects": "1.10.0",
     "iconv-lite": "0.5.1",
     "jschardet": "2.1.1",
@@ -25,7 +26,7 @@
     "minimist": "^1.2.5"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test",
+    "test": "node_modules/mocha/bin/mocha test/**",
     "test-cov": "nyc npm run test",
     "preinstall": "npx npm-force-resolutions"
   },
