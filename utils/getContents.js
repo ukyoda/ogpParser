@@ -9,13 +9,9 @@ module.exports = function getContents(url, redirectFlg=true, headers={}) {
     }
     return new Promise((resolve, reject) => {
         axios.get(url, { headers }).then(res => {
-            if (res.status == 200) {
-                resolve(res.data)
-            } else {
-                reject(new Error(`Request Failed[Status=${res.status}]`))
-            }
+            resolve(res.data)
         }).catch(err => {
-            reject(err)
+            reject(err);
         })
     });
 };
