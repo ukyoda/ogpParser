@@ -1,6 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
-const parser = require('../ogpParser').futureVersion;
+const parser = require('../ogpParser');
 const nock = require('nock');
 const fs = require('fs')
 
@@ -18,7 +18,7 @@ function resCheck(data) {
 }
 
 describe('HTTPリクエストテスト', function () {
-  
+
   before(() => {
     nock('http://example.com').get('/').reply(200, html);
     nock('https://example.com').get('/').reply(200, html);

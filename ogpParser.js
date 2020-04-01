@@ -25,5 +25,6 @@ const parser = function(url, { skipOembed = false } = {}) {
     return data;
   });
 };
-oldParser.futureVersion = parser;
-module.exports = oldParser;
+parser.old = oldParser;
+// oldParser.futureVersion = parser;
+module.exports = parser;
