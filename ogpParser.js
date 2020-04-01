@@ -8,6 +8,7 @@ const getContents = require('./utils/getContents');
 const parseHtml = require('./utils/parseHtml');
 const parseXML = require('fast-xml-parser');
 const he = require('he');
+const oembedParser = require('./utils/oembed');
 
 const parser = function(url, { skipOembed = false } = {}) {
   return getContents(url).then(function(html) {
@@ -16,40 +17,11 @@ const parser = function(url, { skipOembed = false } = {}) {
   }).then(async data => {
     const oembedInfo = data.oembedInfo;
     delete data.oembedInfo;
-    if (oembedInfo === null || skipOembed) {
-      return data;
+    const oembed = await oembedParser(oembedInfo);
+    if (oembed !== null) {
+      data.oembed = oembed;
     }
-    const oembedUrl = oembedInfo.url;
-    const oembedType = oembedInfo.type;
-    if (oembedType === 'json') { // JSON出力
-      console.debug(`oEmbed request(url=${oembedUrl})`);
-      try {
-        const headers = {
-          'Content-Type': 'application/json'
-        };
-        const oembed = await getContents(oembedUrl, { headers });
-        data.oembed = oembed;
-      } catch(err) {
-        console.warn(`oembed request error: ${err}`);
-      }
-    } else if (oembedType === 'xml') {
-      console.debug(`oEmbed request(url=${oembedUrl})`);
-      try {
-        const headers = {
-          'Content-Type': 'text/xml'
-        };
-        const oembedXml = await getContents(oembedUrl, { headers });
-        const oembed = parseXML.parse(oembedXml, { tagValueProcessor : (val, tagName) => he.decode(val) });
-        
-        if (oembed.oembed) {
-          data.oembed = oembed.oembed;
-        } else {
-          console.warn('Undefined variable `oembed.oembed`');
-        }
-      } catch (err) {
-        console.warn(`oembed request error: ${err}`);
-      }
-    }
+
     return data;
   });
 };
