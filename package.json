@@ -38,12 +38,15 @@
     "ogp",
     "OpenGraphProtocol",
     "open-graph",
+    "open graph",
+    "opengraph",
     "open-graph-protocol",
     "scraping",
     "seo",
-    "twitter-card",
-    "facebook-ogp",
-    "meta"
+    "twitter card",
+    "facebook",
+    "meta",
+    "oembed"
   ],
   "author": "ukyoda",
   "license": "MIT",
