@@ -3,7 +3,9 @@
   "version": "0.4.7",
   "private": false,
   "dependencies": {
+    "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "fast-xml-parser": "^3.16.0",
     "follow-redirects": "1.10.0",
     "iconv-lite": "0.5.1",
     "jschardet": "2.1.1",
@@ -17,13 +19,14 @@
     "chai": "^4.2.0",
     "minimist": "^1.2.5",
     "mocha": "^7.1.1",
+    "nock": "^12.0.3",
     "nyc": "^15.0.0"
   },
   "resolutions": {
     "minimist": "^1.2.5"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test",
+    "test": "node_modules/mocha/bin/mocha test/**",
     "test-cov": "nyc npm run test",
     "preinstall": "npx npm-force-resolutions"
   },
@@ -35,12 +38,15 @@
     "ogp",
     "OpenGraphProtocol",
     "open-graph",
+    "open graph",
+    "opengraph",
     "open-graph-protocol",
     "scraping",
     "seo",
-    "twitter-card",
-    "facebook-ogp",
-    "meta"
+    "twitter card",
+    "facebook",
+    "meta",
+    "oembed"
   ],
   "author": "ukyoda",
   "license": "MIT",
