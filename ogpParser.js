@@ -6,6 +6,8 @@
 const oldParser = require('./old/ogpParser');
 const getContents = require('./utils/getContents');
 const parseHtml = require('./utils/parseHtml');
+const parseXML = require('fast-xml-parser');
+const he = require('he');
 
 const parser = function(url, { skipOembed = false } = {}) {
   return getContents(url).then(function(html) {
@@ -28,6 +30,23 @@ const parser = function(url, { skipOembed = false } = {}) {
         const oembed = await getContents(oembedUrl, { headers });
         data.oembed = oembed;
       } catch(err) {
+        console.warn(`oembed request error: ${err}`);
+      }
+    } else if (oembedType === 'xml') {
+      console.debug(`oEmbed request(url=${oembedUrl})`);
+      try {
+        const headers = {
+          'Content-Type': 'text/xml'
+        };
+        const oembedXml = await getContents(oembedUrl, { headers });
+        const oembed = parseXML.parse(oembedXml, { tagValueProcessor : (val, tagName) => he.decode(val) });
+        
+        if (oembed.oembed) {
+          data.oembed = oembed.oembed;
+        } else {
+          console.warn('Undefined variable `oembed.oembed`');
+        }
+      } catch (err) {
         console.warn(`oembed request error: ${err}`);
       }
     }

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>テストテキスト</title>
+    <meta charset="utf-8" />
+    <!-- 正常系：OGPタグテストデータ -->
+    <meta property="og:title" content="このHTMLはテスト用です。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://example.com" />
+    <meta property="og:image" content="http://hoge.example.com/test1.jpg" />
+    <!-- duplicate tag test -->
+    <meta property="og:image" content="http://hoge.example.com/test2.jpg" />
+    <!-- facebook page tag -->
+    <meta property="fb:admins" content="XXXXXXXXXX">
+    <meta property="fb:app_id" content="YYYYYYYYYY">
+
+    <!-- 正常系：SEOタグテストデータ  -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="テストDescription" />
+
+    <!-- 正常系：oEmbed -->
+    <link rel="alternate" type="text/xml+oembed" href="https://oembed.example.com/xmldata" />
+
+    <!-- 正常系：サポートしていないタグ -->
+    <link rel="stylesheet" href="/demo.css"></link>
+    <script type="script" src="/demo.js"></script>
+    <script></script>
+
+    <!-- 異常系：Attribute設定が間違っているMetaタグ -->
+    <meta name_miss="miss" content_miss="miss" />
+  </head>
+  <body>
+    <h1>見出し1</h1>
+    <h2>見出し2</h2>
+  </body>
+</html>
