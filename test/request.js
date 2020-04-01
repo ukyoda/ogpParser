@@ -6,7 +6,9 @@ const fs = require('fs')
 
 const html = fs.readFileSync(`${__dirname}/html/demo.html`);
 const htmlOembed = fs.readFileSync(`${__dirname}/html/demo_oembed.html`);
+const htmlOembedXML = fs.readFileSync(`${__dirname}/html/demo_oembed_xml.html`);
 const jsonOembed = JSON.parse(fs.readFileSync(`${__dirname}/html/oembed.json`));
+const xmlOembed = fs.readFileSync(`${__dirname}/html/oembed.xml`);
 
 function resCheck(data) {
   assert.containsAllKeys(data, ['title', 'ogp', 'seo'], '指定したキーが全て存在する');
@@ -22,7 +24,9 @@ describe('HTTPリクエストテスト', function () {
     nock('https://example.com').get('/').reply(200, html);
     nock('https://example.com').get('/oembed').reply(200, htmlOembed);
     nock('https://example.com').get('/oembed2').reply(200, htmlOembed);
+    nock('https://example.com').get('/oembed_xml').reply(200, htmlOembedXML);
     nock('https://oembed.example.com').get('/jsondata').reply(200, jsonOembed);
+    nock('https://oembed.example.com').get('/xmldata').reply(200, xmlOembed);
     nock('https://notfound.example.com').get('/').reply(404);
   });
   after(() => {
@@ -48,6 +52,7 @@ describe('HTTPリクエストテスト', function () {
       done();
     });
   });
+
   it('正常リクエスト: oEmbed付きデータ', function (done) {
     parser('https://example.com/oembed').then(data => {
       assert.containsAllKeys(data, ['oembed'], 'oembedが取得できている');
@@ -62,12 +67,29 @@ describe('HTTPリクエストテスト', function () {
       done();
     });
   });
+
   it('正常リクエスト: oEmbedをスキップ', function (done) {
     parser('https://example.com/oembed2', {skipOembed: true}).then(data => {
       assert.doesNotHaveAnyKeys(data, ['oembed'])
       done();
     });
   });
+
+  it('正常リクエスト: oEmbed付きデータ(XML)', function (done) {
+    parser('https://example.com/oembed_xml').then(data => {
+      assert.containsAllKeys(data, ['oembed'], 'oembedが取得できている');
+      assert.containsAllKeys(data.oembed, Object.keys(jsonOembed));
+      const oembed = data.oembed;
+      Object.keys(jsonOembed).forEach(key => {
+        assert.equal(oembed[key], jsonOembed[key], `Check Value[key=${key}]`);
+      });
+      done();
+    }).catch(err => {
+      assert.fail(err);
+      done();
+    });
+  });
+
   it('異常系: 存在しないURLにアクセス', function (done) {
     parser('http://abc.example.com').then(data => {
       assert.fail(`resolveが返却されている(url=${url})`)
@@ -77,6 +99,7 @@ describe('HTTPリクエストテスト', function () {
       done();
     });
   });
+
   it('異常系: Not Found エラー', function (done) {
     parser('https://notfound.example.com').then(data => {
       assert.fail(`resolveが返却されている(url=${url})`)
