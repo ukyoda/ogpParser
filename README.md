@@ -3,9 +3,13 @@
 [![npm][npm]][npm-url]
 
 このモジュールは，URLからOGPタグ情報、SEO関連のタグ情報などを抽出する為のライブラリです。
+> **[IMPORTANT]**  
+> v0.5.0からaxios対応、oEmbed追加対応を行なった影響で、API仕様を変更しました。
+> v0.4.x以前の互換関数の使用方法については[こちら](docs/old-version.md)を参照してください
 
 ## 更新履歴
 
+* 2020年 4月: v0.5.0リリース (oEmbed対応、HTTPリクエストをaxiosに変更、**API仕様修正**)
 * 2020年 3月: v0.4.7リリース (npmの検索キーワードを追加のため)
 * 2020年 3月: v0.4.6リリース (セキュリティアップデート)
 * 2020年 2月: v0.4.5リリース (バグFix @RyosukeClaさんありがとうございます!!)
@@ -20,9 +24,6 @@
 * 2014年 6月: データフォーマットを修正
 * 2014年 6月: seoタグ(name, contentのメタタグ)を追加
 
-
-> v0.4.0より、Promise導入を始め、ライブラリの仕様を変更しています。
-> v0.3.1以前のライブラリをおつかいの方はご注意ください。
 
 ## 依存ライブラリ
 
@@ -52,71 +53,148 @@ $ npm run test-cov
 var ogp = require('ogp-parser');
 ```
 
-## サンプル (リダイレクトあり)
+## サンプル (oEmbedあり)
+
+v0.5より、oEmbedの情報を取得できるようにしました。
+oEmbed情報は、`link`タグの`type`が下記のいずれかの時に、`href`のURLにアクセスしてoEmbedデータを取得します。
+
+* `application/json+oembed`
+* `text/xml+oembed`
 
 ```javascript
 
-var parser = require("ogp-parser");
-var url = "http://ogp.me";
-parser(url, true).then(function(data) {
-	console.log(data);
+var ogp = require("../ogpParser");
+console.log("URL:"+url);
+ogp(url).then(function(data) {
+	console.log(JSON.stringify(data, null, "    "));
 }).catch(function(error) {
-	console.error(error);
+    console.error(error);
 });
 
 ```
 
-## サンプル (リダイレクトなし)
-
-```javascript
-
-var parser = require("ogp-parser");
-var url = "http://ogp.me";
-parser(url, false).then(function(data) {
-	console.log(data);
-}).catch(function(error) {
-	console.error(error);
-});
-
-```
-
-## 出力
+### 出力結果
 
 ```json
+
 {
-    "title": "The Open Graph protocol",
+    "title": "うきょう(@ukyoda)さん | Twitter",
     "ogp": {
-        "og:title": [
-            "Open Graph protocol"
+        "al:ios:url": [
+            "twitter://user?screen_name=ukyoda"
         ],
-        "og:type": [
-            "website"
+        "al:ios:app_store_id": [
+            "333903271"
         ],
-        "og:url": [
-            "http://ogp.me/"
+        "al:ios:app_name": [
+            "Twitter"
         ],
-        "og:image": [
-            "http://ogp.me/logo.png"
+        "al:android:url": [
+            "twitter://user?screen_name=ukyoda"
         ],
-        "og:image:type": [
-            "image/png"
+        "al:android:package": [
+            "com.twitter.android"
         ],
-        "og:image:width": [
-            "300"
-        ],
-        "og:image:height": [
-            "300"
-        ],
-        "og:description": [
-            "The Open Graph protocol enables any web page to become a rich object in a social graph."
-        ],
-        "fb:app_id": [
-            "115190258555800"
+        "al:android:app_name": [
+            "Twitter"
         ]
     },
     "seo": {
+        "robots": [
+            "NOODP"
+        ],
         "description": [
-            "The Open Graph protocol enables any web page to become a rich object in a social graph."
+            "うきょう (@ukyoda)さんの最新ツイート 独立系SIer。ビッグデータや機械学習を使ったシステム開発によく携わっています。 最近はPythonが多いですが、JavascriptとかPHPとかJavaとかC/C++での開発もやってます。 https://t.co/y8iW4rQ7lD ザクソン村"
+        ],
+        "msapplication-TileImage": [
+            "//abs.twimg.com/favicons/win8-tile-144.png"
+        ],
+        "msapplication-TileColor": [
+            "#00aced"
+        ],
+        "swift-page-name": [
+            "profile"
+        ],
+        "swift-page-section": [
+            "profile"
+        ]
+    },
+    "oembed": {
+        "url": "https://twitter.com/ukyoda",
+        "title": "",
+        "html": "<a class=\"twitter-timeline\" href=\"https://twitter.com/ukyoda?ref_src=twsrc%5Etfw\">Tweets by ukyoda</a>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+        "width": null,
+        "height": null,
+        "type": "rich",
+        "cache_age": "3153600000",
+        "provider_name": "Twitter",
+        "provider_url": "https://twitter.com",
+        "version": "1.0"
+    }
+}
+
+```
+
+### oEmbedを取得しない
+
+oEmbedは、通常のHTML取得とは別にoEmbedのリクエストが発生するため、
+レスポンス速度が低下することがあります。oEmbedの情報が不要の方は下記の通りoEmbedのリクエストをOFFにすることでレスポンス速度を改善できます。
+
+```javascript
+
+var parser = require("ogp-parser");
+var url = "https://twitter.com/ukyoda";
+parser(url, { skipOembed: true }).then(function(data) {
+	console.log(JSON.stringify(data, null, "    "));
+}).catch(function(error) {
+    console.error(error);
+});
+
+```
+
+### 出力結果
+
+```json
+{
+    "title": "うきょう(@ukyoda)さん | Twitter",
+    "ogp": {
+        "al:ios:url": [
+            "twitter://user?screen_name=ukyoda"
+        ],
+        "al:ios:app_store_id": [
+            "333903271"
+        ],
+        "al:ios:app_name": [
+            "Twitter"
+        ],
+        "al:android:url": [
+            "twitter://user?screen_name=ukyoda"
+        ],
+        "al:android:package": [
+            "com.twitter.android"
+        ],
+        "al:android:app_name": [
+            "Twitter"
+        ]
+    },
+    "seo": {
+        "robots": [
+            "NOODP"
+        ],
+        "description": [
+            "うきょう (@ukyoda)さんの最新ツイート 独立系SIer。ビッグデータや機械学習を使ったシステム開発によく携わっています。 最近はPythonが多いですが、JavascriptとかPHPとかJavaとかC/C++での開発もやってます。 https://t.co/y8iW4rQ7lD ザクソン村"
+        ],
+        "msapplication-TileImage": [
+            "//abs.twimg.com/favicons/win8-tile-144.png"
+        ],
+        "msapplication-TileColor": [
+            "#00aced"
+        ],
+        "swift-page-name": [
+            "profile"
+        ],
+        "swift-page-section": [
+            "profile"
         ]
     }
 }
