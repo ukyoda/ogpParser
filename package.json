@@ -28,8 +28,7 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/**",
-    "test-cov": "nyc npm run test",
-    "preinstall": "npx npm-force-resolutions"
+    "test-cov": "nyc npm run test"
   },
   "repository": {
     "type": "git",
