@@ -3,7 +3,7 @@
   "version": "0.5.4",
   "private": false,
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.3",
     "fast-xml-parser": "^3.16.0",
     "follow-redirects": "1.10.0",
