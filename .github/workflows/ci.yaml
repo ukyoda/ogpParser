@@ -1,0 +1,44 @@
+name: ogp-parser-ci
+
+on:
+  push:
+    branches:
+      - develop
+      - release
+  pull_request:
+    branches:
+      - develop
+      - release
+
+jobs:
+  test:
+    name: test job
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [ 12 ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main # リポジトリのチェックアウト
+
+      - name: Setup node env
+        uses: actions/setup-node@v2.1.4 # Node.jsのセットアップ
+        with:
+          node-version: ${{ matrix.node }} # 利用するNode.jsのバージョン
+
+      - name: Cache node_modules
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies # npm ciコマンド実行
+        run: npm ci
+
+      - name: unit test
+        run: npm test
