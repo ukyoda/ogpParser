@@ -15,7 +15,7 @@
   "readmeFilename": "README.md",
   "gitHead": "",
   "description": "This Package is Open Graph Parser.",
-  "main": "ogpParser.js",
+  "main": "dist/main.js",
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
@@ -50,7 +50,8 @@
     "compiler": "tsc --pretty",
     "compiler:watch": "tsc --watch",
     "build": "npm run cleanup && npm run compiler",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
