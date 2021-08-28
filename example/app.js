@@ -6,7 +6,7 @@ if(!url || url.match(/^(http|https)\:\/\//g) === null) {
     return;
 }
 
-var ogp = require("../ogpParser");
+var ogp = require("../dist/main");
 console.log("URL:"+url);
 ogp(url, { skipOembed: false}).then(function(data) {
 	console.log(JSON.stringify(data, null, "    "));
