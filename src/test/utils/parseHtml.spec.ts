@@ -1,10 +1,10 @@
-import { parseHtml } from "../utils/parseHtml";
+import { parseHtml } from "../../utils/parseHtml";
 import fs from 'fs'
 import path from 'path'
 
-const html = fs.readFileSync(path.join(__dirname, 'fixture/demo.html'), 'utf-8')
-const htmlOembed = fs.readFileSync(path.join(__dirname, 'fixture/demo_oembed.html'), 'utf-8')
-const htmlOembedXml = fs.readFileSync(path.join(__dirname, 'fixture/demo_oembed_xml.html'), 'utf-8')
+const html = fs.readFileSync(path.join(__dirname, '../fixture/demo.html'), 'utf-8')
+const htmlOembed = fs.readFileSync(path.join(__dirname, '../fixture/demo_oembed.html'), 'utf-8')
+const htmlOembedXml = fs.readFileSync(path.join(__dirname, '../fixture/demo_oembed_xml.html'), 'utf-8')
 
 describe('parseHtml test', () => {
   it ('ogp values check', () => {

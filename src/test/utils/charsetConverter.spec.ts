@@ -1,11 +1,11 @@
-import { charsetConverter } from "../utils/charsetConverter";
+import { charsetConverter } from "../../utils/charsetConverter";
 import fs from 'fs';
 import path from 'path'
 
-const eucJP = fs.readFileSync(path.join(__dirname, 'fixture/euc_jp.txt'))
-const shiftJIS = fs.readFileSync(path.join(__dirname, 'fixture/shiftjis.txt'))
-const utf8 = fs.readFileSync(path.join(__dirname, 'fixture/utf8.txt'))
-const ascii = fs.readFileSync(path.join(__dirname, 'fixture/ascii.txt'))
+const eucJP = fs.readFileSync(path.join(__dirname, '../fixture/euc_jp.txt'))
+const shiftJIS = fs.readFileSync(path.join(__dirname, '../fixture/shiftjis.txt'))
+const utf8 = fs.readFileSync(path.join(__dirname, '../fixture/utf8.txt'))
+const ascii = fs.readFileSync(path.join(__dirname, '../fixture/ascii.txt'))
 
 describe('charsetConverter test', () => {
   it ('Check ascii', () => {
