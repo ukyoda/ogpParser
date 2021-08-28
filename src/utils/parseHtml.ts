@@ -3,9 +3,31 @@ import cheerio from 'cheerio'
 type Attributes =
   | [ 'property', 'content' ]
   | [ 'name', 'content' ]
+
 type ContentInfo = {
   prop: string
   content: string
+}
+
+// TODO: 有効なSEOタグのみとするか、これまで通りすべて取り出すか？
+type SeoItem = {
+  [key:string]: string[]
+}
+// TODO: 有効なOGPタグのみとするか、これまで通りすべて取り出すか？
+type OgpItem = {
+  [key:string]: string[]
+}
+
+type OEmbedItem = {
+  type: 'json' | 'xml'
+  url: string
+}
+
+export type ParseResult = {
+  title: string,
+  ogp: OgpItem,
+  seo: SeoItem,
+  oembedInfo?: OEmbedItem
 }
 
 const extractData = ($meta: cheerio.Cheerio, [ key, contentKey ]: Attributes): ContentInfo | undefined => {
@@ -17,26 +39,6 @@ const extractData = ($meta: cheerio.Cheerio, [ key, contentKey ]: Attributes): C
       content
     }
   }
-}
-
-// TODO: 有効なSEOタグのみとするか、これまで通りすべて取り出すか？
-type SeoItem = {
-  [key:string]: string[]
-}
-// TODO: 有効なOGPタグのみとするか、これまで通りすべて取り出すか？
-type OgpItem = {
-  [key:string]: string[]
-}
-type OEmbedItem = {
-  type: 'json' | 'xml'
-  url: string
-}
-
-export type ParseResult = {
-  title?: string,
-  ogp: OgpItem,
-  seo: SeoItem,
-  oembedInfo?: OEmbedItem
 }
 
 export const parseHtml = (html: string): ParseResult => {
