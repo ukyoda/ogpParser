@@ -22,8 +22,8 @@ const getForJson = async (url: string) => {
   const headers = {
     'Content-Type': 'application/json'
   }
-  const oembed = axios.get(url, { headers })
-  return oembed as object
+  const oembed = await axios.get(url, { headers })
+  return oembed.data as object
 }
 
 const getForXml = async (url: string) => {
