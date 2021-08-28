@@ -4,3 +4,5 @@ lib
 .DS_Store
 .vscode
 .nyc_output
+/dist
+ogp-parser-*.tgz
