@@ -44,8 +44,8 @@
   },
   "scripts": {
     "cleanup": "rm -rf ./dist",
-    "test": "node_modules/mocha/bin/mocha test/**",
-    "test-cov": "nyc npm run test",
+    "test": "jest src/test/**",
+    "test-cov": "jest --coverage src/test/**",
     "jest": "jest",
     "compiler": "tsc --pretty",
     "compiler:watch": "tsc --watch",
