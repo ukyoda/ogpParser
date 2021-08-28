@@ -36,15 +36,21 @@
     "minimist": "^1.2.5",
     "mocha": "^7.1.1",
     "nock": "^12.0.3",
-    "nyc": "^15.0.0"
+    "nyc": "^15.0.0",
+    "typescript": "^4.4.2"
   },
   "resolutions": {
     "minimist": "^1.2.5"
   },
   "scripts": {
+    "cleanup": "rm -rf ./dist",
     "test": "node_modules/mocha/bin/mocha test/**",
     "test-cov": "nyc npm run test",
-    "jest": "jest"
+    "jest": "jest",
+    "compiler": "tsc --pretty",
+    "compiler:watch": "tsc --watch",
+    "build": "npm run cleanup && npm run compiler",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
