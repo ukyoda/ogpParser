@@ -17,7 +17,22 @@
   "description": "This Package is Open Graph Parser.",
   "main": "ogpParser.js",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/babel__core": "^7.1.15",
+    "@types/babel__preset-env": "^7.9.2",
+    "@types/chai": "^4.2.21",
+    "@types/cheerio": "^0.22.30",
+    "@types/follow-redirects": "1.13.1",
+    "@types/he": "^1.1.2",
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.172",
+    "@types/minimist": "^1.2.2",
+    "@types/mocha": "^9.0.0",
+    "babel-jest": "^27.1.0",
     "chai": "^4.2.0",
+    "jest": "^27.1.0",
     "minimist": "^1.2.5",
     "mocha": "^7.1.1",
     "nock": "^12.0.3",
@@ -28,7 +43,8 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/**",
-    "test-cov": "nyc npm run test"
+    "test-cov": "nyc npm run test",
+    "jest": "jest"
   },
   "repository": {
     "type": "git",
