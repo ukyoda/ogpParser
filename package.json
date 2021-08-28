@@ -45,8 +45,8 @@
   "scripts": {
     "cleanup": "rm -rf ./dist",
     "test": "jest src/test/**",
-    "test-cov": "jest --coverage src/test/**",
-    "jest": "jest",
+    "test:coverage": "jest --coverage src/test/**",
+    "test:watch": "jest --watch src/test/**",
     "compiler": "tsc --pretty",
     "compiler:watch": "tsc --watch",
     "build": "npm run cleanup && npm run compiler",
