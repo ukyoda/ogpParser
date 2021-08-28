@@ -5,3 +5,4 @@ lib
 .vscode
 .nyc_output
 /dist
+ogp-parser-*.tgz
