@@ -1,6 +1,6 @@
 {
   "name": "ogp-parser",
-  "version": "0.6.0-rc.0",
+  "version": "0.6.0",
   "private": false,
   "dependencies": {
     "axios": "^0.21.1",
