@@ -6,7 +6,7 @@
     "axios": ">=0.21.2",
     "cheerio": "^1.0.0-rc.3",
     "fast-xml-parser": "^3.16.0",
-    "follow-redirects": "1.10.0",
+    "follow-redirects": "1.14.7",
     "he": "^1.2.0",
     "iconv-lite": "0.5.1",
     "jschardet": "2.1.1",
