@@ -48,7 +48,7 @@ npm install -S ogp-parser
 npm test
 ```
 
-If you want to see coverity:
+If you want to see coverage:
 
 ```bash
 npm run test-cov
