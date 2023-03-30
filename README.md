@@ -2,6 +2,8 @@
 
 [![npm][npm]][npm-url]
 
+[日本語のREADMEはこちら](README-ja.md)
+
 "ogp-parser" is a node.js library to extract some information such as OGP, SEO from website.
 
 > **[IMPORTANT]**  
