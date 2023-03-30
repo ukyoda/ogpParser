@@ -154,7 +154,7 @@ ogp(url).then(function(data) {
 ### If you aren't necessary oEmbed information
 
 You need to request oEmbed information besides an normal http request.
-If you won't need oEmbed information in your application, you can disable to extract it to use `skipOembed` option.
+If you won't need oEmbed information in your application, you can disable to extract it by using `skipOembed` option.
 
 ```javascript
 
