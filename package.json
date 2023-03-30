@@ -75,5 +75,8 @@
   "license": "MIT",
   "directories": {
     "example": "example"
+  },
+  "volta": {
+    "node": "12.22.12"
   }
 }
