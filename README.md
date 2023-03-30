@@ -12,6 +12,7 @@
 
 ## Release Information
 
+* 2023-03: v0.7.0 released translate README to English and some security update
 * 2021-08: v0.6.0 released support typescript
 * 2021-04: v0.5.6 released security updates
 * 2021-02: v0.5.5 released update axios
