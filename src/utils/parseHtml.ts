@@ -1,4 +1,4 @@
-import cheerio from 'cheerio'
+import * as cheerio from 'cheerio'
 
 type Attributes =
   | [ 'property', 'content' ]
@@ -30,7 +30,7 @@ export type ParseResult = {
   oembedInfo?: OEmbedItem
 }
 
-const extractData = ($meta: cheerio.Cheerio, [ key, contentKey ]: Attributes): ContentInfo | undefined => {
+const extractData = ($meta: cheerio.Cheerio<cheerio.Element>, [ key, contentKey ]: Attributes): ContentInfo | undefined => {
   const prop = $meta.attr(key)
   const content = $meta.attr(contentKey)
   if (prop && content) {

@@ -1,10 +1,10 @@
 {
   "name": "ogp-parser",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": false,
   "dependencies": {
     "axios": ">=0.21.2",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.12",
     "fast-xml-parser": "^3.16.0",
     "follow-redirects": "1.14.8",
     "he": "^1.2.0",
@@ -23,7 +23,6 @@
     "@types/babel__core": "^7.1.15",
     "@types/babel__preset-env": "^7.9.2",
     "@types/chai": "^4.2.21",
-    "@types/cheerio": "^0.22.30",
     "@types/follow-redirects": "1.13.1",
     "@types/he": "^1.1.2",
     "@types/jest": "^27.0.1",
@@ -37,7 +36,7 @@
     "mocha": "^10.2.0",
     "nock": "^12.0.3",
     "nyc": "^15.0.0",
-    "typescript": "^4.4.2"
+    "typescript": "^4.8"
   },
   "resolutions": {
     "minimist": "^1.2.5"
@@ -47,6 +46,7 @@
     "test": "jest src/test/**",
     "test:coverage": "jest --coverage src/test/**",
     "test:watch": "jest --watch src/test/**",
+    "lint:tsc": "tsc --noEmit --incremental",
     "compiler": "tsc --pretty",
     "compiler:watch": "tsc --watch",
     "build": "npm run cleanup && npm run compiler",
