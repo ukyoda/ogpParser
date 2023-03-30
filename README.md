@@ -71,7 +71,7 @@ import ogp from 'ogp-parser'
 ## Example
 
 From v0.5, we have supported to extract oEmbed information.
-We will extract oEmbed to use link tags that has either types:
+We will use any href attribute in the link tag that has either types:
 
 * `application/json+oembed`
 * `text/xml+oembed`
