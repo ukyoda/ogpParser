@@ -6,7 +6,7 @@
     "axios": ">=0.21.2",
     "cheerio": "^1.0.0-rc.3",
     "fast-xml-parser": "^3.16.0",
-    "follow-redirects": "1.14.7",
+    "follow-redirects": "1.14.8",
     "he": "^1.2.0",
     "iconv-lite": "0.5.1",
     "jschardet": "2.1.1",
@@ -34,7 +34,7 @@
     "chai": "^4.2.0",
     "jest": "^27.1.0",
     "minimist": "^1.2.5",
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "nock": "^12.0.3",
     "nyc": "^15.0.0",
     "typescript": "^4.4.2"
