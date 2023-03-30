@@ -9,7 +9,7 @@ on:
     branches:
       - develop
       - release
-      - master
+      - main
 
 jobs:
   test:
