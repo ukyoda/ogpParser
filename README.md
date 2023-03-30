@@ -219,8 +219,8 @@ parser(url, { skipOembed: true }).then(function(data) {
 
 ## Disclaimer Note
 
-I publish this library as MIT License.
-I'm not going to place special regulations to use this library if the range of the license.
+I publish this library as MIT License.  
+I'm not going to place special regulations to use this library if the range of the license.  
 And I make no guarantees even if you got some accidents to use this library.
 
 [npm]: https://img.shields.io/npm/v/ogp-parser
