@@ -12,6 +12,7 @@
 
 ## Release Information
 
+* 2023-03: v0.7.1 released TypeScript Upgrade (to 4.8, because build failed v0.7.0)
 * 2023-03: v0.7.0 released translate README to English and some security update
 * 2021-08: v0.6.0 released support typescript
 * 2021-04: v0.5.6 released security updates
