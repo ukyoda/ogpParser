@@ -2,61 +2,59 @@
 
 [![npm][npm]][npm-url]
 
-[日本語のREADMEはこちら](README-ja.md)
-
-"ogp-parser" is a node.js library to extract some information such as OGP, SEO from website.
-
+このモジュールは，URLからOGPタグ情報、SEO関連のタグ情報などを抽出する為のライブラリです。
 > **[IMPORTANT]**  
-> From v0.5.0, we modified our library to use axios and we can extract oEmbed information. So v0.5.0 has some destructive changes.  
-> If you have to use the interface of v0.4.x, please check [docs/old-version.md](docs/old-version.md).
+> v0.5.0からaxios対応、oEmbed追加対応を行なった影響で、API仕様を変更しました。
+> v0.4.x以前の互換関数の使用方法については[こちら](docs/old-version.md)を参照してください
 
-## Release Information
+## 更新履歴
 
-* 2021-08: v0.6.0 released support typescript
-* 2021-04: v0.5.6 released security updates
-* 2021-02: v0.5.5 released update axios
-* 2020-08: v0.5.4 released fix bug
-* 2020-07: v0.5.3 released fix bug that we cannot install ogp-parser from npm
-* 2020-07: v0.5.2 released securities update (#27)
-* 2020-04: v0.5.1 released same as v0.5.0 (because publishing v0.5.0 to npm is failed)
-* 2020-04: v0.5.0 released support extracting oEmbed, and update interface to use axios
-* 2020-03: v0.4.7 released add npm keyword
-* 2020-03: v0.4.6 released security update
-* 2020-02: v0.4.5 released bug fix (Thank you for @RyosukeCla)
-* 2019-08: v0.4.4 released library update
-* 2018-01: v0.4.1 released refactoring (to use ES2015 syntax)
-* 2016-08: v0.4.0 released refactoring (support Promise)
-* 2016-07: v0.3.1 released refactoring (support charset that is not UTF-8)
-* 2015-05: v0.3.0 released
-* 2015-04: support redirect option
-* 2015-03: support https
-* 2015-03: support page title
-* 2014-06: fix data format
-* 2014-06: add seo tag informations
+* 2021年 8月: v0.6.0リリース (TypeScript化)
+* 2021年 4月: v0.5.6リリース (セキュリティアップデート)
+* 2021年 2月: v0.5.5リリース axiosのバージョン更新
+* 2020年 8月: v0.5.4リリース HTMLの文字コード対応が抜けていたので修正
+* 2020年 7月: v0.5.3リリース npm installできない問題を修正
+* 2020年 7月: v0.5.2リリース セキュリティアップデート(プルリク#27対応)
+* 2020年 4月: v0.5.1リリース v0.5.0が`npm publish`できなかったので・・・
+* 2020年 4月: v0.5.0リリース (oEmbed対応、HTTPリクエストをaxiosに変更、**API仕様修正**)
+* 2020年 3月: v0.4.7リリース (npmの検索キーワードを追加のため)
+* 2020年 3月: v0.4.6リリース (セキュリティアップデート)
+* 2020年 2月: v0.4.5リリース (バグFix @RyosukeClaさんありがとうございます!!)
+* 2019年 8月: v0.4.4リリース（パッケージのアップデート）
+* 2018年 1月: v0.4.1リリース (リファクタリング、ES2015対応、他)
+* 2016年 8月: v0.4.0リリース (リファクタリング、Promise対応、他、多くを修正)
+* 2016年 7月: v0.3.1リリース (UTF-8以外の文字コードに対応)
+* 2015年 5月: v0.3.0リリース
+* 2015年 4月: リダイレクトに対応しました。第３引数をtrueにすると、リダイレクトを追跡してページを取得します
+* 2015年 3月: https対応
+* 2015年 3月: ページタイトル情報を追加
+* 2014年 6月: データフォーマットを修正
+* 2014年 6月: seoタグ(name, contentのメタタグ)を追加
 
-## Dependencies
 
-please check my package.json
+## 依存ライブラリ
 
-## Install
+package.jsonを参照してください
 
-```bash
-npm install -S ogp-parser
-```
-
-## Test
+## インストール
 
 ```bash
-npm test
+$ npm install ogp-parser
 ```
 
-If you want to see coverage:
+## テスト
 
 ```bash
-npm run test-cov
+$ npm test
 ```
 
-## Usage
+or 
+
+```bash
+$ npm run test-cov
+```
+
+## 使い方
 
 ### JavaScript
 
@@ -70,19 +68,18 @@ const ogp = require('ogp-parser');
 import ogp from 'ogp-parser'
 ```
 
-## Example
+## サンプル (oEmbedあり)
 
-From v0.5, we have supported to extract oEmbed information.
-To extract oEmbed, we will use any href attribute in the link tag that has either types:
+v0.5より、oEmbedの情報を取得できるようにしました。
+oEmbed情報は、`link`タグの`type`が下記のいずれかの時に、`href`のURLにアクセスしてoEmbedデータを取得します。
 
 * `application/json+oembed`
 * `text/xml+oembed`
 
 ```javascript
 
-const ogp = require("ogpParser");
+const ogp = require("../ogpParser");
 console.log("URL:"+url);
-
 ogp(url).then(function(data) {
     console.log(JSON.stringify(data, null, "    "));
 }).catch(function(error) {
@@ -91,7 +88,7 @@ ogp(url).then(function(data) {
 
 ```
 
-### Result
+### 出力結果
 
 ```json
 
@@ -153,10 +150,10 @@ ogp(url).then(function(data) {
 
 ```
 
-### If you aren't necessary oEmbed information
+## oEmbedを取得しない
 
-You need to request oEmbed information besides an normal http request.
-If you won't need oEmbed information in your application, you can disable to extract it by using `skipOembed` option.
+oEmbedは、通常のHTML取得とは別にoEmbedのリクエストが発生するため、
+レスポンス速度が低下することがあります。oEmbedの情報が不要の方は下記の通りoEmbedのリクエストをOFFにすることでレスポンス速度を改善できます。
 
 ```javascript
 
@@ -170,7 +167,7 @@ parser(url, { skipOembed: true }).then(function(data) {
 
 ```
 
-### Result (no oEmbed)
+### 出力結果 (no oEmbed)
 
 ```json
 {
@@ -219,11 +216,10 @@ parser(url, { skipOembed: true }).then(function(data) {
 
 ```
 
-## Disclaimer Note
+## 免責事項など
 
-I publish this library as MIT License.  
-I'm not going to place special regulations to use this library if the range of the license.  
-And I make no guarantees even if you got some accidents to use this library.
+このライブラリはMITライセンスで公開しています。ライブラリの利用に対して特に、制限をかけません。
+また、このライブラリを利用により何らかのトラブルが発生したとしても、製作者は一切責任を追いません。
 
 [npm]: https://img.shields.io/npm/v/ogp-parser
 [npm-url]: https://www.npmjs.com/package/ogp-parser
