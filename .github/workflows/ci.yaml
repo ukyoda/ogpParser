@@ -41,5 +41,9 @@ jobs:
       - name: Install dependencies # npm ciコマンド実行
         run: npm ci
 
+      - name: type check
+        run: npm run lint:tsc
+
       - name: unit test
         run: npm test
+
