@@ -1,13 +1,16 @@
-import { parseHtml, ParseResult } from './utils/parseHtml';
-import { fetchOembed } from './utils/fetchOembed';
+import { parseHtml } from './utils/parseHtml';
+import { fetchOembed, OembedData } from './utils/fetchOembed';
 import { getContents } from './utils/getContents';
 
 export type OgpParserOptions = {
   skipOembed: boolean;
 };
 
-export type OgpParserResult = Omit<ParseResult, 'oembedInfo'> & {
-  oembed?: object;
+export type OgpParserResult = {
+  title: string;
+  ogp: Record<string, string[]>;
+  seo: Record<string, string[]>;
+  oembed?: OembedData;
 };
 
 const parser = async (url: string, options?: OgpParserOptions) => {

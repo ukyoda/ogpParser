@@ -1,8 +1,8 @@
-import { parseHtml } from '../../utils/parseHtml';
+import { parseHtml } from './parseHtml';
 import fs from 'fs';
 import path from 'path';
 
-const fixtureDirectory = path.resolve(__dirname, '../../__fixture__');
+const fixtureDirectory = path.resolve(__dirname, '../__fixture__');
 const html = fs.readFileSync(path.join(fixtureDirectory, 'demo.html'), 'utf-8');
 const htmlOembed = fs.readFileSync(
   path.join(fixtureDirectory, 'demo_oembed.html'),
