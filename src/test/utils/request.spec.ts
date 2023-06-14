@@ -32,4 +32,15 @@ describe('request test', () => {
     expect(res.data).toBe(undefined);
     expect(res.text).toContain('<html>');
   });
+
+  test('request is not available because of nettowk error', async () => {
+    const promise = request.get('https://abc.example.com');
+    expect(promise).rejects.toThrow();
+  });
+
+  test('the page is not found', async () => {
+    const res = await request.get('https://notfound.example.com');
+    expect(res.status).toBe(404);
+    expect(res.data?.reason).toBe('Not Found');
+  });
 });
