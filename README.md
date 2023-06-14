@@ -11,6 +11,8 @@
 
 ## Release Information
 
+* 2023-06: v0.8.1 released
+  * remove axios from package.json (I forgot...)
 * 2023-06: v0.8.0 released
   * removed some dependent modules such as axios
   * modified the type definition of oEmbed structure

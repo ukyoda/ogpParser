@@ -1,9 +1,8 @@
 {
   "name": "ogp-parser",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": false,
   "dependencies": {
-    "axios": ">=0.21.2",
     "cheerio": "^1.0.0-rc.12",
     "fast-xml-parser": "^3.16.0",
     "he": "^1.2.0",
