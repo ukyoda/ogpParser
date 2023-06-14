@@ -2,7 +2,7 @@ import { getContents } from './getContents';
 import { ParseResult } from './parseHtml';
 import parseXML from 'fast-xml-parser';
 import he from 'he';
-import axios from 'axios';
+import { request } from './request';
 
 type OembedInfo = Required<ParseResult>['oembedInfo'];
 
@@ -23,7 +23,7 @@ const getForJson = async (url: string) => {
     'Content-Type': 'application/json',
     'User-Agent': 'bot',
   };
-  const oembed = await axios.get(url, { headers });
+  const oembed = await request.get(url, { headers });
   return oembed.data as object;
 };
 
