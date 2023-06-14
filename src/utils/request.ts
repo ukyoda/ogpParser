@@ -13,22 +13,32 @@ type ResponseData<T> = {
   data?: T;
   config: RequestConfig;
 };
+const REDIRECT_LOOP_LIMIT = 20;
 
 const httpRequest = <T = any>(
   url: string,
-  options: Options = {}
+  options: Options = {},
+  count = 0
 ): Promise<ResponseData<T>> => {
   return new Promise((resolve, reject) => {
+    if (count > REDIRECT_LOOP_LIMIT) {
+      return reject(new Error('Redirect Loop Error'));
+    }
     const req = https.request(url, options, (res) => {
+      const statusCode = res.statusCode ?? 0;
       // Redirect
-      if (res.statusCode === 301 && res.headers.location) {
+      if (statusCode >= 300 && statusCode < 400 && res.headers.location) {
         const originalUrl = new URL(url);
-        const newUrl = new URL(res.headers.location, originalUrl.origin);
-        httpRequest(newUrl.toString(), options)
+        const newUrl = new URL(
+          res.headers.location,
+          originalUrl.origin
+        ).toString();
+        httpRequest(newUrl, options, count + 1)
           .then((res) => resolve(res))
           .catch((err) => reject(err));
         return;
       }
+
       let data = '';
 
       res.on('data', (chunk) => {
