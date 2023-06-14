@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [ 12 ]
+        node: [12]
 
     steps:
       - name: Checkout
@@ -46,4 +46,3 @@ jobs:
 
       - name: unit test
         run: npm test
-
