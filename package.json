@@ -6,11 +6,9 @@
     "axios": ">=0.21.2",
     "cheerio": "^1.0.0-rc.12",
     "fast-xml-parser": "^3.16.0",
-    "follow-redirects": "1.14.8",
     "he": "^1.2.0",
     "iconv-lite": "0.5.1",
-    "jschardet": "2.1.1",
-    "lodash": "^4.17.19"
+    "jschardet": "2.1.1"
   },
   "readmeFilename": "README.md",
   "gitHead": "",
@@ -25,10 +23,8 @@
     "@types/follow-redirects": "1.13.1",
     "@types/he": "^1.1.2",
     "@types/jest": "^27.5.2",
-    "@types/lodash": "^4.14.172",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.3.0",
-    "babel-jest": "^27.1.0",
     "jest": "^27.5.1",
     "minimist": "^1.2.5",
     "msw": "^1.2.2",
@@ -47,7 +43,7 @@
     "lint:tsc": "tsc --noEmit --incremental",
     "compile": "tsc --pretty",
     "compile:watch": "tsc --watch",
-    "build": "npm run cleanup && npm run compile",
+    "build": "npm run lint:tsc && npm run test && npm run cleanup && npm run compile",
     "prepublishOnly": "npm run build",
     "prepack": "npm run build"
   },
