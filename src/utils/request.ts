@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http';
-import https, { RequestOptions } from 'https';
+import https, { RequestOptions as RequestOptionsBase } from 'https';
 
-type Options = Pick<RequestOptions, 'headers' | 'method'>;
+type Options = Pick<RequestOptionsBase, 'headers' | 'method'>;
 
 type RequestConfig = Options & {
   url: string;
@@ -9,8 +9,8 @@ type RequestConfig = Options & {
 type ResponseData<T> = {
   status: number;
   headers?: IncomingHttpHeaders;
-  text: string;
-  data: T | undefined;
+  text?: string;
+  data?: T;
   config: RequestConfig;
 };
 
@@ -39,7 +39,7 @@ const httpRequest = <T = any>(
         const responseData: ResponseData<T> = {
           status: res.statusCode ?? 0,
           headers: res.headers,
-          text: data,
+          text: data || undefined,
           data: undefined,
           config: {
             ...options,
@@ -59,11 +59,11 @@ const httpRequest = <T = any>(
   });
 };
 
-type ReqOptions = Omit<Options, 'method'>;
+export type RequestOptions = Omit<Options, 'method'>;
 
 export const request = {
-  get: <T = any>(url: string, options: ReqOptions = {}) =>
+  get: <T = any>(url: string, options: RequestOptions = {}) =>
     httpRequest<T>(url, { ...options, method: 'get' }),
-  post: <T = any>(url: string, options: ReqOptions = {}) =>
+  post: <T = any>(url: string, options: RequestOptions = {}) =>
     httpRequest<T>(url, { ...options, method: 'post' }),
 };
