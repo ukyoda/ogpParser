@@ -42,4 +42,12 @@ describe('parseHtml test', () => {
     expect(oembedInfoXML?.type).toBe('xml');
     expect(oembedInfoXML?.url).toBe('https://oembed.example.com/xmldata');
   });
+
+  it('not html', () => {
+    const data = parseHtml('');
+    expect(Object.keys(data.ogp).length).toBe(0);
+    expect(Object.keys(data.seo).length).toBe(0);
+    expect(data.title).toBe('');
+    expect(data.oembedInfo).not.toBeTruthy();
+  });
 });

@@ -7,16 +7,14 @@ type ContentInfo = {
   content: string;
 };
 
-type OEmbedItem = {
-  type: 'json' | 'xml';
-  url: string;
-};
-
 export type ParseResult = {
   title: string;
   ogp: Record<string, string[]>;
   seo: Record<string, string[]>;
-  oembedInfo?: OEmbedItem;
+  oembedInfo?: {
+    type: 'json' | 'xml';
+    url: string;
+  };
 };
 
 const extractData = (
@@ -61,8 +59,9 @@ export const parseHtml = (html: string): ParseResult => {
   const oembedXmlTag = $link.filter(
     (_, val) => $(val).attr('type') === 'text/xml+oembed'
   );
-  let oembedInfo: OEmbedItem | undefined = undefined;
-  if (oembedJsonTag.length > 0) {
+
+  let oembedInfo: ParseResult['oembedInfo'];
+  if (oembedJsonTag.length > 0 && oembedJsonTag.attr('href')) {
     const url = oembedJsonTag.attr('href');
     if (url) {
       oembedInfo = {
