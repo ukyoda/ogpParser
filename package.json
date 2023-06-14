@@ -45,9 +45,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint:tsc": "tsc --noEmit --incremental",
-    "compiler": "tsc --pretty",
-    "compiler:watch": "tsc --watch",
-    "build": "npm run cleanup && npm run compiler",
+    "compile": "tsc --pretty",
+    "compile:watch": "tsc --watch",
+    "build": "npm run cleanup && npm run compile",
     "prepublishOnly": "npm run build",
     "prepack": "npm run build"
   },
