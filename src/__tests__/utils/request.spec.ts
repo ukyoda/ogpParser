@@ -43,4 +43,9 @@ describe('request test', () => {
     expect(res.status).toBe(404);
     expect(res.data?.reason).toBe('Not Found');
   });
+
+  test('check maximum redirect loop', async () => {
+    const promise = request.get('https://redirect.example.com/loop');
+    expect(promise).rejects.toThrow();
+  });
 });

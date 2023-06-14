@@ -49,6 +49,18 @@ const server = setupServer(
   rest.get('https://redirect.example.com', (req, res, ctx) => {
     return res(ctx.status(301), ctx.set('Location', 'https://example.com'));
   }),
+  rest.get('https://redirect.example.com/loop', (req, res, ctx) => {
+    return res(
+      ctx.status(302),
+      ctx.set('Location', 'https://redirect.example.com/loopA')
+    );
+  }),
+  rest.get('https://redirect.example.com/loopA', (req, res, ctx) => {
+    return res(
+      ctx.status(302),
+      ctx.set('Location', 'https://redirect.example.com/loop')
+    );
+  }),
   rest.get('https://abc.example.com', (req, res, ctx) => {
     return res.networkError('Failed to connect');
   })
