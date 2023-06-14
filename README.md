@@ -8,10 +8,13 @@
 
 > **[IMPORTANT]**  
 > From v0.5.0, we modified our library to use axios and we can extract oEmbed information. So v0.5.0 has some destructive changes.  
-> If you have to use the interface of v0.4.x, please check [docs/old-version.md](docs/old-version.md).
 
 ## Release Information
 
+* 2023-06: v0.8.0 released
+  * removed some dependent modules such as axios
+  * modified the type definition of oEmbed structure
+  * refactored some codes
 * 2023-03: v0.7.1 released TypeScript Upgrade (to 4.8, because build failed v0.7.0)
 * 2023-03: v0.7.0 released translate README to English and some security update
 * 2021-08: v0.6.0 released support typescript
