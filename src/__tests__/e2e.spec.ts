@@ -1,5 +1,5 @@
 import parser from '../main';
-import './__mocks__/setupServer';
+import '../__mocks__/setupServer';
 
 describe('end 2 end test', () => {
   it('standard http request', async () => {
