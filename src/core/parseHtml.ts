@@ -82,8 +82,8 @@ export const parseHtml = (html: string): ParseResult => {
   }
   return {
     title,
-    ogp: ogpSet,
-    seo: seoSet,
+    ogp: ogpItems,
+    seo: seoItems,
     oembedInfo,
   };
 };

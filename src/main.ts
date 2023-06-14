@@ -1,6 +1,6 @@
-import { parseHtml } from './utils/parseHtml';
-import { fetchOembed, OembedData } from './utils/fetchOembed';
-import { getContents } from './utils/getContents';
+import { parseHtml } from './core/parseHtml';
+import { fetchOembed, OembedData } from './core/fetchOembed';
+import { getContents } from './core/getContents';
 
 export type OgpParserOptions = {
   skipOembed: boolean;
