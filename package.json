@@ -4,7 +4,7 @@
   "private": false,
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "fast-xml-parser": "^3.16.0",
+    "fast-xml-parser": "^4.2.4",
     "he": "^1.2.0",
     "iconv-lite": "0.5.1",
     "jschardet": "2.1.1"
