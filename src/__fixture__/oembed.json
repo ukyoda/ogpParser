@@ -1,15 +1,15 @@
 {
-    "title": "NON STYLE 漫才行脚②「運命の出会い」",
-    "height": 270,
-    "thumbnail_width": 480,
-    "type": "video",
-    "provider_name": "YouTube",
-    "thumbnail_url": "https://i.ytimg.com/vi/vh4B7uU_bkk/hqdefault.jpg",
-    "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/vh4B7uU_bkk?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
-    "provider_url": "https://www.youtube.com/",
-    "width": 480,
-    "thumbnail_height": 360,
-    "author_url": "https://www.youtube.com/channel/UCJcyQ-N0sbvwjYpDNXP9tsw",
-    "version": "1.0",
-    "author_name": "NON STYLEチャンネル"
+  "title": "ogpOembed",
+  "height": 270,
+  "thumbnail_width": 480,
+  "type": "video",
+  "provider_name": "oembedData",
+  "thumbnail_url": "https://example.com/thumbnail.jpg",
+  "html": "<iframe src=\"https://example.com/embed\"></iframe>",
+  "provider_url": "https://example.com/",
+  "width": 480,
+  "thumbnail_height": 360,
+  "author_url": "https://example.com",
+  "version": "1.0",
+  "author_name": "ukyoda"
 }

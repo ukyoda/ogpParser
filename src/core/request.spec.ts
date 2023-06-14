@@ -1,5 +1,5 @@
-import { request } from '../../utils/request';
-import '../../__mocks__/setupServer';
+import { request } from './request';
+import '../__mocks__/setupServer';
 
 describe('request test', () => {
   test('request to the thing which can parse from json to object', async () => {

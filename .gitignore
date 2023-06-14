@@ -5,3 +5,4 @@ lib
 .nyc_output
 /dist
 ogp-parser-*.tgz
+*.tsbuildinfo

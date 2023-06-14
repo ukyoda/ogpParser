@@ -1,8 +1,8 @@
-import { parseHtml } from '../../utils/parseHtml';
+import { parseHtml } from './parseHtml';
 import fs from 'fs';
 import path from 'path';
 
-const fixtureDirectory = path.resolve(__dirname, '../../__fixture__');
+const fixtureDirectory = path.resolve(__dirname, '../__fixture__');
 const html = fs.readFileSync(path.join(fixtureDirectory, 'demo.html'), 'utf-8');
 const htmlOembed = fs.readFileSync(
   path.join(fixtureDirectory, 'demo_oembed.html'),
@@ -41,5 +41,13 @@ describe('parseHtml test', () => {
     expect(oembedInfo?.url).toBe('https://oembed.example.com/jsondata');
     expect(oembedInfoXML?.type).toBe('xml');
     expect(oembedInfoXML?.url).toBe('https://oembed.example.com/xmldata');
+  });
+
+  it('not html', () => {
+    const data = parseHtml('');
+    expect(Object.keys(data.ogp).length).toBe(0);
+    expect(Object.keys(data.seo).length).toBe(0);
+    expect(data.title).toBe('');
+    expect(data.oembedInfo).not.toBeTruthy();
   });
 });

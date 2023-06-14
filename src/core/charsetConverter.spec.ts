@@ -1,8 +1,8 @@
-import { charsetConverter } from '../../utils/charsetConverter';
+import { charsetConverter } from './charsetConverter';
 import fs from 'fs';
 import path from 'path';
 
-const fixtureDirectory = path.resolve(__dirname, '../../__fixture__');
+const fixtureDirectory = path.resolve(__dirname, '../__fixture__');
 const eucJP = fs.readFileSync(path.join(fixtureDirectory, 'euc_jp.txt'));
 const shiftJIS = fs.readFileSync(path.join(fixtureDirectory, 'shiftjis.txt'));
 const utf8 = fs.readFileSync(path.join(fixtureDirectory, 'utf8.txt'));
