@@ -28,6 +28,5 @@ describe('request test', () => {
     const res = await request.get('https://example.com/redirect');
     expect(res.status).toBe(200);
     expect(res.data?.title).toBeTruthy();
-    console.log(res.headers);
   });
 });
