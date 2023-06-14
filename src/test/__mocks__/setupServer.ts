@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import * as fs from 'fs';
 import path from 'path';
-const fixtureDirectory = path.resolve(__dirname, '../../fixture');
+const fixtureDirectory = path.resolve(__dirname, '../fixture');
 const oembedXmlHtml = fs.readFileSync(
   path.join(fixtureDirectory, 'demo_oembed_xml.html')
 );
@@ -22,29 +22,35 @@ const demoHtml = fs.readFileSync(
 );
 
 const server = setupServer(
-  rest.get('https://example.com/oembed/json', (req, res, ctx) => {
-    return res(ctx.json(oembedJson));
+  rest.get('http://example.com', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.body(demoHtml));
   }),
-  rest.get('https://example.com/oembed/json.html', (req, res, ctx) => {
+  rest.get('https://example.com', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.body(demoHtml));
+  }),
+  rest.get('https://example.com/oembed', (req, res, ctx) => {
     return res(ctx.body(oembedJsonHtml));
   }),
-  rest.get('https://example.com/oembed/xml.html', (req, res, ctx) => {
+  rest.get('https://example.com/oembed_xml', (req, res, ctx) => {
     return res(ctx.body(oembedXmlHtml));
   }),
-  rest.get('https://example.com/oembed/xml', (req, res, ctx) => {
+  rest.get('https://oembed.example.com/jsondata', (req, res, ctx) => {
+    return res(ctx.json(oembedJson));
+  }),
+  rest.get('https://oembed.example.com/xmldata', (req, res, ctx) => {
     return res(ctx.xml(oembedXml));
   }),
-  rest.get('https://example.com/demo', (req, res, ctx) => {
-    return res(ctx.body(demoHtml));
+  rest.get('https://notfound.example.com', (req, res, ctx) => {
+    return res(ctx.status(404), ctx.json({ reason: 'Not Found' }));
   }),
   rest.post('https://example.com/post', (req, res, ctx) => {
     return res(ctx.body(''));
   }),
-  rest.get('http://example.com/oembed/json', (req, res, ctx) => {
-    return res(ctx.json(oembedJson));
+  rest.get('https://redirect.example.com', (req, res, ctx) => {
+    return res(ctx.status(301), ctx.set('Location', 'https://example.com'));
   }),
-  rest.get('https://example.com/redirect', (req, res, ctx) => {
-    return res(ctx.status(301), ctx.set('Location', '/oembed/json'));
+  rest.get('https://abc.example.com', (req, res, ctx) => {
+    return res.networkError('Failed to connect');
   })
 );
 
