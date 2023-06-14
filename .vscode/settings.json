@@ -1,0 +1,19 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.format.enable": false,
+  "eslint.workingDirectories": ["./"],
+  "editor.formatOnSave": true,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
