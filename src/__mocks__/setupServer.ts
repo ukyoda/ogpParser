@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import * as fs from 'fs';
 import path from 'path';
-const fixtureDirectory = path.resolve(__dirname, '../fixture');
+const fixtureDirectory = path.resolve(__dirname, '../__fixture__');
 const oembedXmlHtml = fs.readFileSync(
   path.join(fixtureDirectory, 'demo_oembed_xml.html')
 );
